@@ -11,7 +11,7 @@ export default({ config, db }) => {
   let api = Router();
 
   // '/v1/warung' - GET all food trucks
-  api.get('/', (req, res) => {
+  api.get('/', authenticate, (req, res) => {
     Warung.find({}, (err, warungs) => {
       if (err) {
         res.send(err);
@@ -31,7 +31,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/warung/add' - POST - add a food truck
-  api.post('/add', (req, res) => {
+  api.post('/add', authenticate, (req, res) => {
     let newWarung = new Warung();
     newWarung.name = req.body.name;
     newWarung.foodtype = req.body.foodtype;
