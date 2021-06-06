@@ -11,7 +11,7 @@ export default({ config, db }) => {
   let api = Router();
 
   // '/v1/warung' - GET all food trucks
-  api.get('/', authenticate, (req, res) => {
+  api.get('/', (req, res) => {
     Warung.find({}, (err, warungs) => {
       if (err) {
         res.send(err);
