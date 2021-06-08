@@ -1,4 +1,4 @@
 export default {
-  "port": 3005,
+  "port": 3030,
   "bodyLimit": "100kb"
 }
