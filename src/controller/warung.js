@@ -11,7 +11,7 @@ export default({ config, db }) => {
   let api = Router();
 
   // '/v1/warung' - GET all food trucks
-  api.get('/', authenticate, (req, res) => {
+  api.get('/', (req, res) => {
     Warung.find({}, (err, warungs) => {
       if (err) {
         res.send(err);
@@ -47,7 +47,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/warung/:id' - DELETE - remove a food truck
-  api.delete('/:id', (req, res) => {
+  api.delete('/:id', authenticate, (req, res) => {
     Warung.remove({
       _id: req.params.id
     }, (err, warung) => {
@@ -66,7 +66,7 @@ export default({ config, db }) => {
   });
 
   // '/v1/warung/:id' - PUT - update an existing record
-  api.put('/:id', (req, res) => {
+  api.put('/:id', (req, authenticate, res) => {
     Warung.findById(req.params.id, (err, warung) => {
       if (err) {
         res.send(err);
@@ -86,7 +86,7 @@ export default({ config, db }) => {
 
   // add a review by a specific warung id
   // '/v1/warung/reviews/add/:id'
-  api.post('/reviews/add/:id', (req, res) => {
+  api.post('/reviews/add/:id', authenticate, (req, res) => {
     Warung.findById(req.params.id, (err, warung) => {
       if (err) {
         res.send(err);
